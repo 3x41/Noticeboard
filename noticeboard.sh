@@ -5,17 +5,17 @@
 # upgrade packages to the latest versions
 	apt-get update -y
 	apt-get upgrade -y
-	sleep 5
+	#sleep 5
 
 # Add a user, this will be used for autologin and config
 	useradd -m kiosk
 	# passwd kiosk
 
 # Install the required packages
-	apt-get install sudo xorg chromium openbox lightdm unclutter --no-install-recommends
+	apt-get install sudo xorg chromium chromium-sandbox openbox lightdm unclutter --no-install-recommends
 
 # Add autologin at the end of the config file
-	sed -i "s/# autologin-user =/autologin-user = kiosk #/g" /etc/lightdm/lightdm.conf
+	sed -i "s/# autologin-user=/autologin-user=kiosk/g" /etc/lightdm/lightdm.conf
 
 	#sed -i "$ a autologin-user=kiosk" /etc/lightdm/lightdm.conf
 	#sed -i "$ a user-session=openbox" /etc/lightdm/lightdm.conf
