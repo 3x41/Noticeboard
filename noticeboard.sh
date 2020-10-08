@@ -12,10 +12,10 @@
 	# passwd kiosk
 
 # Install the required packages
-	apt-get install sudo xorg chromium chromium-sandbox openbox lightdm unclutter --no-install-recommends
+	apt-get install sudo xorg chromium chromium-sandbox openbox lightdm unclutter --no-install-recommends -y
 
 # Add autologin at the end of the config file
-	sed -i "s/# autologin-user=/autologin-user=kiosk/g" /etc/lightdm/lightdm.conf
+	sed -i "s/#autologin-user=/autologin-user=kiosk/g" /etc/lightdm/lightdm.conf
 
 	#sed -i "$ a autologin-user=kiosk" /etc/lightdm/lightdm.conf
 	#sed -i "$ a user-session=openbox" /etc/lightdm/lightdm.conf
@@ -25,36 +25,35 @@
 	#user-session=openbox
 
 # Login as the new user
-	su kiosk
-	bash
-	cd ~
-	mkdir .config
-	mkdir .config/openbox
+	#su kiosk
+	#bash
+	mkdir /home/kiosk/.config
+	mkdir /home/kiosk/.config/openbox
 
 # Create the config file for openbox for the user
 # mkdir -p $HOME/.config/openbox
-	touch .config/openbox/autostart
+	touch /home/kiosk/.config/openbox/autostart
 
 # touch $HOME/.config/openbox/autostart
-	echo "xset s off" >> ~/.config/openbox/autostart
-	echo "xset -dpms" >> ~/.config/openbox/autostart
-	echo "xset s noblank" >> ~/.config/openbox/autostart
+	echo "xset s off" >> /home/kiosk/.config/openbox/autostart
+	echo "xset -dpms" >> /home/kiosk/.config/openbox/autostart
+	echo "xset s noblank" >> /home/kiosk/.config/openbox/autostart
 
 # You may need to force the screen resolution
 # echo "xrandr -s 800x600" >> $HOME/.config/openbox/autostart
 
 # This is to auto hide the mouse pointer
-	echo "unclutter &" >> ~/.config/openbox/autostart
-	echo " " >> ~/.config/openbox/autostart
-	echo "chromium \\" >> ~/.config/openbox/autostart
-	echo "   --no-first-run \\" >> ~/.config/openbox/autostart
-	echo "   --disable \\" >> ~/.config/openbox/autostart
-	echo "   --disable-translate \\" >> ~/.config/openbox/autostart
-	echo "   --disable-infobars \\" >> ~/.config/openbox/autostart
-	echo "   --disable-suggestions-service \\" >> ~/.config/openbox/autostart
-	echo "   --disable-save-password-bubble \\" >> ~/.config/openbox/autostart
-	echo "   --start-maximized \\" >> ~/.config/openbox/autostart
-	echo "   --kiosk "http://www.google.com" &" >> ~/.config/openbox/autostart
+	echo "unclutter &" >> /home/kiosk/.config/openbox/autostart
+	echo " " >> /home/kiosk/.config/openbox/autostart
+	echo "chromium \\" >> /home/kiosk/.config/openbox/autostart
+	echo "   --no-first-run \\" >> /home/kiosk/.config/openbox/autostart
+	echo "   --disable \\" >> /home/kiosk/.config/openbox/autostart
+	echo "   --disable-translate \\" >> /home/kiosk/.config/openbox/autostart
+	echo "   --disable-infobars \\" >> /home/kiosk/.config/openbox/autostart
+	echo "   --disable-suggestions-service \\" >> /home/kiosk/.config/openbox/autostart
+	echo "   --disable-save-password-bubble \\" >> /home/kiosk/.config/openbox/autostart
+	echo "   --start-maximized \\" >> /home/kiosk/.config/openbox/autostart
+	echo "   --kiosk "http://www.google.com" &" >> /home/kiosk/.config/openbox/autostart
 
 # END OF SCRIPT
 
